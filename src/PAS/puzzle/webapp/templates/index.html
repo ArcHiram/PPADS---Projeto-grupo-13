@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Strata by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner" style="text-align: center;">
+					<a href="#" class="image avatar"><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+					<h1><strong>Puzzle</strong><br /> Simplificando seu contato com a midia<br />
+					criado por:<br />
+					 <a>Allef Wallace Rodrigues Caetano - 31958338<br />
+						Hiram Monari Bertoni - 31949169<br />
+						Pedro Ivan Pimenta Iwayama - 31930352<br />
+						Vinicius Lobato de Moraes - 31923712
+					</a>.</h1>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h2>Puzzle</h2>
+						</header>
+						<p>A empresa está com esse projeto inovador de conectar as pessoas através de seus gostos para literatura e a sétima arte, apresentando talvez até uma conexão maior.
+							Compartilhar com outras pessoas seus gostos, irá e sempre trará recomendações novas, e cada vez mais que seus posts forem mais recomendados isso irá trazer cada vez mais novas recomendações para o usuário e ele sempre terá informações novas.
+							A empresa tem como finalidade conectar as pessoas através de seus gostos e de divulgar entretenimento,  fazendo com que sua divulgação cresça cada vez mais.
+</p>
+					</section>
+
+				<!-- Two -->
+					<section id="two">
+						<h2>Posts</h2>
+						<div class="row">
+                            {% for post in posts %}
+                                <article class="col-6 col-12-xsmall work-item">
+									{% if post.imagem %}
+										<img src="{{ post.imagem.url }}" alt="" width="250px" height="100px"/>
+									{% else %}
+										<a href="{% static 'images/fulls/01.jpg' %}" class="image fit thumb">
+										<img src="{% static 'images/thumbs/01.jpg' %}" alt="" /></a>
+									{% endif %}
+									
+                                    <h3>{{ post.title }}</h3>
+                                    <p>{{ post.sub_title }}</p>
+                                    <span>{{ post.get_categoty_label }}</span>
+                                    <ul class="actions">
+                                        <li><a href="{% url 'post_detail' post.id %}" class="button">Read more</a></li>
+                                    </ul>
+                                </article>
+                            {% endfor %}
+						</div>
+						<ul class="actions">
+							<li><a href="{% url 'list' %}" class="button">Full Portfolio</a></li>
+						</ul>
+					</section>
+
+				<!-- Three -->
+					<section id="three">
+						<h2>Get In Touch</h2>
+						<div class="row">
+							<div class="col-8 col-12-small">
+								<form method="post" action="{% url 'save_form' %}">
+									{% csrf_token %}
+									<div class="row gtr-uniform gtr-50">
+										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
+										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
+										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
+									</div>
+									<input type="submit" value="Send Message" />
+								</form>
+
+							</div>
+							<div class="col-4 col-12-small">
+								<ul class="labeled-icons">
+									<li>
+										<h3 class="icon solid fa-home"><span class="label">Local</span></h3>
+										Universidade Presbiteriana Mackenzie
+									</li>
+									<li>
+										<h3 class="icon solid fa-mobile-alt"><span class="label">Telefone</span></h3>
+										(11) 960604262
+									</li>
+									<li>
+										<h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
+										<a href="#">contatospuzzle@gmail.com</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.poptrox.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>

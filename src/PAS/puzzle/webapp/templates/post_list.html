@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Strata by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner" style="text-align: center;">
+				<a href="{% url 'bio' %}" class="image avatar"><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+				<h1> {{ user.username }} <strong> </strong><br />
+					<ul class="actions">
+						<li style="padding-top: 120px; padding-left: 110px;">
+							<a href="{% url 'home_blog' %}" class="button">Voltar</a>
+						</li>
+					</ul>
+	
+			</div>
+		</header>
+		<!-- Main -->
+		<div id="main" >
+
+				<!-- Two -->
+					<section id="two">
+						<h2>Posts</h2>
+						<div class="row">
+                            {% for post in posts %}
+                                <article class="col-6 col-12-xsmall work-item">
+									{% if post.imagem %}
+										<img src="{{ post.imagem.url }}" alt="" width="250px" height="100px"/>
+									{% else %}
+										<a href="{% static 'images/fulls/01.jpg' %}" class="image fit thumb">
+										<img src="{% static 'images/thumbs/01.jpg' %}" alt="" /></a>
+									{% endif %}
+									
+                                    <h3>{{ post.title }}</h3>
+                                    <p>{{ post.sub_title }}</p>
+                                    <span>{{ post.get_categoty_label }}</span>
+                                    <ul class="actions">
+                                        <li><a href="{% url 'post_detail' post.id %}" class="button">Read more</a></li>
+                                    </ul>
+                                </article>
+                            {% endfor %}
+						</div>
+					</section>
+
+		<!-- Three -->
+		<section>
+			<h2>Create your post</h2>
+			<div class="row">
+				<div class="col-8 col-12-small">
+					<form method="post" action="{% url 'create' %}">
+						{% csrf_token %}
+						<div class="row gtr-uniform gtr-50">
+							<div class="col-6 col-12-xsmall"><input type="text" name="title" id="title" placeholder="title" /></div>
+							<div class="col-6 col-12-xsmall"><input type="text" name="sub_title" id="sub_title" placeholder="sub_title" /></div>
+							<div class="col-6 col-12-xsmall"><input type="number" name="nota" id="nota" placeholder="nota" /></div>
+							<div class="col-6 col-12-xsmall"><input type="radio" name="categories" id="categories" placeholder="categories" /></div>
+							<div class="col-6 col-12-xsmall"><input type="file" name="imagem" id="imagem" placeholder="imagem" /></div>
+							<div class="col-12"><textarea name="content" id="content" placeholder="content" rows="4"></textarea></div>
+						</div>
+						<input type="submit" value="create" />
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+				
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.poptrox.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
